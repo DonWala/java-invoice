@@ -46,4 +46,42 @@ public class Invoice {
     public int getNumber() {
         return number;
     }
+    
+    public int getProductAmountByName(String name){
+        Product tmpProd = getProductByName(name);
+        if (tmpProd == null){
+            return 0;
+        }else{
+            return products.get(tmpProd);
+        }
+    }
+
+    private Product getProductByName(String name){
+        for (Product product : products.keySet()) {
+            if (product.getName().equals(name)){
+                return product;
+            }
+        }
+        return null;
+    }
+
+    private boolean productExists(String name){
+        if (getProductByName(name) == null){
+            return false;
+        }
+        return true;
+    }
+
+    public String print(){
+        String retVal = "Numer faktury: " + getNumber() + "\n";
+        int i = 0;
+        for (Product product : products.keySet()) {
+            retVal = retVal + product.getName() + ", " + products.get(product) + ", " + product.getPrice().multiply(BigDecimal.valueOf(products.get(product))) + "\n";
+            i++;
+        }
+        retVal = retVal + "Liczba pozycji: " + i;
+
+        return retVal;
+    }
 }
+
