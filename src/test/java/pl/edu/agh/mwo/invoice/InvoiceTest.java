@@ -132,17 +132,17 @@ public class InvoiceTest {
     @Test
     public void testPrintInvoice(){
         Invoice invoiceToPrint = new Invoice();
-        String example = "Numer faktury: " + invoiceToPrint.getNumber() + "\n" + "Kozi Serek, 3, 30" + "\n" +"Owoce, 1, 200" + "\n" +  "Liczba pozycji: 2";
+        String example = "Numer faktury: " + invoiceToPrint.getNumber() + "\n" + "Warzywa, 3, 30" + "\n" +"Owoce, 1, 200" + "\n" +  "Liczba pozycji: 2";
         invoiceToPrint.addProduct(new TaxFreeProduct("Owoce", new BigDecimal("200")));
-        invoiceToPrint.addProduct(new DairyProduct("Kozi Serek", new BigDecimal("10")), 3);
+        invoiceToPrint.addProduct(new DairyProduct("Wazywa", new BigDecimal("10")), 3);
         Assert.assertEquals(example, invoiceToPrint.print());
     }
 
     @Test
     public void testDuplicates(){
         Invoice invoice2 = new Invoice();
-        invoice2.addProduct(new TaxFreeProduct("Zelki", new BigDecimal("10")),2);
-        invoice2.addProduct(new TaxFreeProduct("Zelki", new BigDecimal("10")),1);
-        Assert.assertEquals(invoice2.getProductAmountByName("Zelki"), 3);
+        invoice2.addProduct(new TaxFreeProduct("Owoce", new BigDecimal("10")),2);
+        invoice2.addProduct(new TaxFreeProduct("Owoce", new BigDecimal("10")),1);
+        Assert.assertEquals(invoice2.getProductAmountByName("Owoce"), 3);
     }
 }
